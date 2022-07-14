@@ -17,6 +17,7 @@ export function gracefulShutdown(signal: string, app: FastifyInstance) {
 export async function connectToDb() {
   try {
     await mongoose.connect(MONGODB_URI);
+    logger.info('Connected to MongoDB');
   } catch (error) {
     logger.error(error, "Couldn't connect to database");
     process.exit(1);
