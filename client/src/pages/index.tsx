@@ -39,7 +39,7 @@ const Home: NextPage = () => {
 			</Head>
 			<main className={styles.main}>
         {step === 'register' && <SignUp setStep={setStep} setVaultKey={setVaultKey} />}
-        {step === 'login' && <SignIn />}
+        {step === 'login' && <SignIn setVault={setVault} setStep={setStep} setVaultKey={setVaultKey} />}
         {step === 'vault' && <Vault vault={vault} vaultKey={vaultKey}/>}
       </main>
 		</div>
