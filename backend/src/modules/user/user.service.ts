@@ -6,7 +6,10 @@ export async function createUser(input: {
   hashedPassword: string;
   email: string;
 }) {
-  return UserModel.create(input);
+  return UserModel.create({
+    email: input.email,
+    hashedPassword: input.hashedPassword,
+  });
 }
 
 export function generateSalt() {

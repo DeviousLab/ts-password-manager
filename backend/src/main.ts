@@ -1,5 +1,5 @@
 import createServer from "./utils/createServer";
-import { gracefulShutdown } from "./utils/db";
+import { connectToDb, gracefulShutdown } from "./utils/db";
 import logger from "./utils/logger";
 
 async function main() {
@@ -8,6 +8,7 @@ async function main() {
   try {
     const url = await app.listen(4000, '0.0.0.0');
     logger.info(`Server listening on ${url}`);
+    await connectToDb();
   } catch (error) {
     logger.error(error);
     process.exit(1);

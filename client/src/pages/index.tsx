@@ -8,8 +8,17 @@ import SignUp from '../components/SignUp';
 import SignIn from '../components/SignIn';
 import Vault from '../components/Vault';
 
+export interface VaultItem {
+	website: string;
+	username: string;
+	password: string;
+}
+
 const Home: NextPage = () => {
 	const [step, setStep] = useState<'login' | 'register' | 'vault'>('register');
+	const [vault, setVault] = useState<VaultItem[]>([]);
+	const [vaultKey, setVaultKey] = useState('');
+
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -18,7 +27,7 @@ const Home: NextPage = () => {
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 			<main className={styles.main}>
-        {step === 'register' && <SignUp />}
+        {step === 'register' && <SignUp setStep={setStep} setVaultKey={setVaultKey} />}
         {step === 'login' && <SignIn />}
         {step === 'vault' && <Vault />}
       </main>
