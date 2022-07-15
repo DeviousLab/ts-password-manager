@@ -9,7 +9,7 @@ export async function createUser(input: {
 }) {
   return UserModel.create({
     email: input.email,
-    hashedPassword: input.hashedPassword,
+    password: input.hashedPassword,
   });
 }
 
