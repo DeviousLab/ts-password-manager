@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
@@ -15,10 +15,21 @@ export interface VaultItem {
 }
 
 const Home: NextPage = () => {
-	const [step, setStep] = useState<'login' | 'register' | 'vault'>('register');
+	const [step, setStep] = useState<'login' | 'register' | 'vault'>('vault');
 	const [vault, setVault] = useState<VaultItem[]>([]);
 	const [vaultKey, setVaultKey] = useState('');
 
+	useEffect(() => {
+		const vault = window.sessionStorage.getItem('vault');
+		const vaultKey = window.sessionStorage.getItem('vaultKey');
+		if (vault) {
+			setVault(JSON.parse(vault));
+		}
+		if (vaultKey) {
+			setVaultKey(vaultKey);
+			setStep('vault');
+		}
+	}, []);
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -29,7 +40,7 @@ const Home: NextPage = () => {
 			<main className={styles.main}>
         {step === 'register' && <SignUp setStep={setStep} setVaultKey={setVaultKey} />}
         {step === 'login' && <SignIn />}
-        {step === 'vault' && <Vault />}
+        {step === 'vault' && <Vault vault={vault} vaultKey={vaultKey}/>}
       </main>
 		</div>
 	);
