@@ -1,10 +1,11 @@
 import React from 'react'
 import { Box, FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
 import { useFieldArray, useForm } from 'react-hook-form';
+import { useMutation } from 'react-query';
+
 import { VaultItem } from '../pages'
 import FormWrapper from './FormWrapper';
 import { encryptVault } from '../crypto';
-import { useMutation } from 'react-query';
 import { saveVault } from '../api';
 
 const Vault = ({ vault = [], vaultKey = "" }: {
